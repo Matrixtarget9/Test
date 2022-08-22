@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="rembourse_form_view" model="ir.ui.view">
+            <field name="name">rembourse.form.view</field>
+            <field name="model">remboures.remboures</field>
+            <field name="arch" type="xml">
+                <form string="Les rembouressements">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="remboursé,prêt"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="voyage_id"/>
+                                <field name="client_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Colis">
+                                <field name="remboures_line_ids" options="{'no_open': True}">
+                                    <tree edit="false" create="false" delete="false">
+                                        <field name="order_id"/>
+                                        <field name="address"/>
+                                        <field name="total"/>
+                                        <field name="received_value"/>
+                                    </tree>
+                                    <form edit="false" create="false" delete="false">
+                                        <group>
+                                            <field name="order_id"/>
+                                            <field name="address"/>
+                                            <field name="total"/>
+                                            <field name="received_value"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                 <group col="6" class="mt-4 mt-md-0">
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="remboures_total">
+                                        <field name="total_due"
+                                               colspan="4"/>
+                                        <field name="total_received"
+                                               colspan="4"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="remboures_search_view" model="ir.ui.view">
+            <field name="name">voyage.search.view</field>
+            <field name="model">remboures.remboures</field>
+            <field name="arch" type="xml">
+                <search string="Refunds">
+                    <field name="name"/>
+                    <field name="voyage_id"/>
+                    <field name="client_id"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="rembourse_tree_view" model="ir.ui.view">
+            <field name="name">voyage.tree.view</field>
+            <field name="model">remboures.remboures</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="voyage_id"/>
+                    <field name="client_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="rembourse_action_window" model="ir.actions.act_window">
+            <field name="name">Rembouressements</field>
+            <field name="res_model">remboures.remboures</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to add new Voyage.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Refunds"
+                  id="rembourse_menu"
+                  parent="remboursement_menu_root"
+                  sequence="3"
+                  action="rembourse_action_window"/>
+    </data>
+</odoo>

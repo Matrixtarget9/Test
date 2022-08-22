@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="voyage_form_view" model="ir.ui.view">
+            <field name="name">voyage.form.view</field>
+            <field name="model">voyage.voyage</field>
+            <field name="arch" type="xml">
+                <form string="voyage">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="delivery_id"/>
+                                <field name="date"/>
+                                <field name="destination" widget="many2many_tags" force_save="1"
+                                   readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Packages">
+                                <field name="voyage_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="order_id"/>
+                                        <field name="address" string="Destination"/>
+                                        <field name="total"/>
+                                        <field name="received_value"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="order_id"/>
+                                            <field name="address"/>
+                                            <field name="total"/>
+                                            <field name="received_value"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group name="note_group" col="6" class="mt-4 mt-md-0">
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="voyage_total">
+                                        <field name="total_due"
+                                               colspan="4"/>
+                                        <field name="total_received"
+                                               colspan="4"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="voyage_tree_view" model="ir.ui.view">
+            <field name="name">voyage.tree.view</field>
+            <field name="model">voyage.voyage</field>
+            <field name="arch" type="xml">
+                <tree string="voyage">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="total_received"/>
+                    <field name="total_due"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="voyage_search_view" model="ir.ui.view">
+            <field name="name">voyage.search,view</field>
+            <field name="model">voyage.voyage</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="delivery_id"/>
+                    <group string="Group By">
+                        <filter string="Date" name="groupby_date" context="{'group_by': 'date'}"/>
+                        <filter string="Livreur" name="groupby_delivery" context="{'group_by': 'delivery_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="voyage_action_window" model="ir.actions.act_window">
+            <field name="name">Voyage</field>
+            <field name="res_model">voyage.voyage</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="voyage_search_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to add new voyage.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Voyage"
+                  id="voyage_menu"
+                  parent="remboursement_menu_root"
+                  sequence="2"
+                  action="voyage_action_window"/>
+
+    </data>
+</odoo>

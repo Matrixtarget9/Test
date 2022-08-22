@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="package_order_form_view" model="ir.ui.view">
+            <field name="name">package.order.form.view</field>
+            <field name="model">package.order</field>
+            <field name="arch" type="xml">
+                <form string="Colis">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder=""/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="vendor_id" string="Fournisseur" />
+                                <field name="customer_id" string="Client"/>
+                                <field name="address"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Produits">
+                                <field name="line_ids">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="quantity"/>
+                                        <field name="price"/>
+                                        <field name="sub_total"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="product_id"/>
+                                            <field name="quantity"/>
+                                            <field name="price"/>
+                                            <field name="sub_total"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group colspan="4">
+                                        <field name="note" class="oe-bordered-editor" nolabel="1"
+                                               placeholder="Terms and conditions..."/>
+                                    </group>
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="pakage_order_total">
+                                        <field name="total"
+                                               colspan="4"/>
+                                        <field name="value_due"
+                                               colspan="4"/>
+                                        <field name="customer_commission"
+                                               colspan="4" invisible="1"/>
+                                         <field name="refund_amount"
+                                               colspan="4" invisible="1"/>
+
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="package_order_tree_view" model="ir.ui.view">
+            <field name="name">package.order.tree.view</field>
+            <field name="model">package.order</field>
+            <field name="arch" type="xml">
+                <tree string="Colis">
+                    <field name="name"/>
+                    <field name="vendor_id"/>
+                    <field name="customer_id"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="package_order_search_view" model="ir.ui.view">
+            <field name="name">package.order.search.view</field>
+            <field name="model">package.order</field>
+            <field name="arch" type="xml">
+                <search string="Colis Search">
+                    <field name="name"/>
+                    <field name="vendor_id"/>
+                    <field name="customer_id"/>
+                    <field name="total"/>
+                    <!--                    <group expand="1" string="Group By">-->
+                    <!--                        <filter string="Example Field" name="example_field" domain="[]"-->
+                    <!--                                context="{'group_by':'example_field'}"/>-->
+                    <!--                    </group>-->
+                </search>
+            </field>
+        </record>
+
+        <record id="package_order_action" model="ir.actions.act_window">
+            <field name="name">Colis</field>
+            <field name="res_model">package.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to add new colis.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Remboursement" id="remboursement_menu_root"/>
+
+        <menuitem name="Colis"
+                  id="package_order_menu"
+                  parent="remboursement_menu_root"
+                  sequence="1"
+                  action="package_order_action"/>
+
+
+    </data>
+</odoo>

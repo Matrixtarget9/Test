@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_package_order,access.package.order,model_package_order,base.group_user,1,1,1,1
+access_package_order_line,access.package.order.line,model_package_order_line,base.group_user,1,1,1,1
+access_delivery_man,access.delivery.man,model_delivery_man,base.group_user,1,1,1,1
+access_voyage_voyage,access.voyage.voyage,model_voyage_voyage,base.group_user,1,1,1,1
+access_voyage_line,access.voyage.line,model_voyage_line,base.group_user,1,1,1,1
+access_remboures_remboures,access.remboure.remboures,model_remboures_remboures,base.group_user,1,1,1,1
+access_remboures_line,access.remboures.line,model_remboures_line,base.group_user,1,1,1,1
+access_caisse_caisse,access.caisse.line,model_caisse_caisse,base.group_user,1,1,1,1
+access_caisse_line,access.caisse.line,model_caisse_line,base.group_user,1,1,1,1

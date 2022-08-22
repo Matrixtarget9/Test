@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="caisse_form_view" model="ir.ui.view">
+            <field name="name">caisse.form.view</field>
+            <field name="model">caisse.caisse</field>
+            <field name="arch" type="xml">
+                <form string="Caisse">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="delivery_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Colis">
+                                <field name="caisse_line_ids">
+                                    <tree>
+                                        <field name="order_id"/>
+                                        <field name="address"/>
+                                        <field name="total"/>
+                                        <field name="refund_amount"/>
+                                        <field name="customer_commission"/>
+                                        <field name="received_value" force_save="1"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="order_id"/>
+                                            <field name="address"/>
+                                            <field name="total"/>
+                                            <field name="refund_amount"/>
+                                            <field name="customer_commission"/>
+                                            <field name="received_value" force_save="1"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group col="6" class="mt-4 mt-md-0">
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="caisse_total">
+                                        <field name="total_due"
+                                               colspan="4"/>
+                                        <field name="total_received"
+                                               colspan="4"/>
+                                          <field name="total_refund_amount"
+                                               colspan="4"/>
+                                        <field name="total_customer_commission"
+                                               colspan="4"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="caisse_tree_view" model="ir.ui.view">
+            <field name="name">caisse.tree.view</field>
+            <field name="model">caisse.caisse</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="delivery_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="caisse_search_view" model="ir.ui.view">
+            <field name="name">caisse.search.view</field>
+            <field name="model">caisse.caisse</field>
+            <field name="arch" type="xml">
+                <search string="Caisse Search">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="delivery_id"/>
+                    <group string="Group By">
+                        <filter string="Date" name="groupby_date" context="{'group_by': 'date'}"/>
+                        <filter string="Livreur" name="groupby_delivery" context="{'group_by': 'delivery_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="caisse_act_window" model="ir.actions.act_window">
+            <field name="name">Caisse</field>
+            <field name="res_model">caisse.caisse</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to add new caisse.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Caisse"
+                  id="caisse_menu"
+                  parent="remboursement_menu_root"
+                  sequence="4"
+                  action="caisse_act_window"/>
+
+    </data>
+</odoo>
